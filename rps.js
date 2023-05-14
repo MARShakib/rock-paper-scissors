@@ -19,20 +19,49 @@ function playRound(playerSelection, computerSelection){
     let loseMessage = 'You Lose!! Computer wins';
 
     if(playerSelection === 'rock' && computerSelection === 'scissors'){
+        winCount++;
         return winMessage;
     }
     else if(playerSelection === 'paper' && computerSelection === 'rock'){
+        winCount++;
         return winMessage;
     }
     else if(playerSelection === 'scissors' && computerSelection === 'paper'){
+        winCount++;
         return winMessage;
     }
     else if(playerSelection === computerSelection){
         return 'Draw';
     }
-    else return loseMessage;
+    else {
+        loseCount++;
+        return loseMessage;
+    }
 }
 
-const playerSelection = 'rock';
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+let playerSelection;
+let computerSelection;
+let winCount = 0;
+let loseCount = 0;
+
+
+function game(){
+    winCount = 0;
+    loseCount = 0;
+    for(let i =0; i<5; i++){
+        playerSelection = prompt('Your Turn').toLowerCase();
+        computerSelection = getComputerChoice();
+        console.log(`you : ${playerSelection}`);
+        console.log(`Computer : ${computerSelection}`)
+        console.log(playRound(playerSelection, computerSelection));
+    }
+    if(winCount > loseCount){
+        console.log('Yoo!! You win!!');
+    }
+    else if(loseCount > winCount){
+        console.log('Ooops!! You Lose!!');
+    }
+    else console.log('It\'s a draw');
+}
+
+game();
