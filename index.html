@@ -5,9 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="./rps.js" defer></script>
+    <script src="https://kit.fontawesome.com/2352af08b9.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+   <header>
+    <h1 class="title" style="text-align:center;">ROCK PAPER SCISSORS</h1>
+   </header>
+   <main>
+    <div class="score-board">
+        <h2 style="text-align:center;" id="scoreResult">Choose Your Weapon</h2> <br>
+        <h3 style="text-align:center;" id="scoreMessage">Score 5 points to win the game</h3>
+        <div class="scores">
+            <div class="scoreBlock">
+                <div style="text-align:center;" class="playerTurn">❔</div>
+                <p style="text-align:center;">Player : 0</p>
+            </div>
+            <div class="scoreBlock">
+                <div style="text-align:center;" class="computerTurn">❔</div>
+                <pstyle="text-align:center;">Computer : 0</p>
+            </div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button class="btn">✊</button>
+        <button class="btn">✋</button>
+        <button class="btn">✌</button>
+    </div>
+   </main>
+   <footer>
+    <p>
+        Copyright ©
+        <script>
+          document.write(new Date().getFullYear())
+        </script>
+        MARShakib
+    </p>
+    <a href="https://github.com/MARShakib" target="_blank">
+        <i class="fab fa-github"></i>
+    </a>
+   </footer> 
 </body>
 </html>

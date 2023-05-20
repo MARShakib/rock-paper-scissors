@@ -64,4 +64,4 @@ function game(){
     else console.log('It\'s a draw');
 }
 
-game();
+//game();
