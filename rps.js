@@ -18,8 +18,8 @@ function getComputerChoice(){
 
 function playRound(playerSelection, computerSelection){
 
-    let winMessage = 'You Win!!';
-    let loseMessage = 'You Lose!! Computer wins';
+    let winMessage = 'You Won!!';
+    let loseMessage = 'You Lost!!';
 
     if(playerSelection === 'rock' && computerSelection === 'scissors'){
         winCount++;
@@ -57,27 +57,6 @@ let computerSelection;
 let winCount = 0;
 let loseCount = 0;
 
-function game(){
-    winCount = 0;
-    loseCount = 0;
-    for(let i =0; i<5; i++){
-        playerSelection = prompt('Your Turn').toLowerCase();
-        computerSelection = getComputerChoice();
-        console.log(`you : ${playerSelection}`);
-        console.log(`Computer : ${computerSelection}`)
-        console.log(playRound(playerSelection, computerSelection));
-    }
-    if(winCount > loseCount){
-        console.log('Yoo!! You win!!');
-    }
-    else if(loseCount > winCount){
-        console.log('Ooops!! You Lose!!');
-    }
-    else console.log('It\'s a draw');
-}
-
-//game();
-
 function btnClick(e){
     if(this.getAttribute('id') === 'rock'){
         playerTurn.textContent = '✊';
@@ -85,6 +64,7 @@ function btnClick(e){
         computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
         updateScore();
+        checkResult();
     }
     else if(this.getAttribute('id') === 'paper'){
         playerTurn.textContent = '✋';
@@ -92,6 +72,7 @@ function btnClick(e){
         computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
         updateScore();
+        checkResult();
     }
     else {
         playerTurn.textContent = '✌';
@@ -99,12 +80,38 @@ function btnClick(e){
         computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
         updateScore();
+        checkResult();
     }
 }
 
 function updateScore(){
     playerScore.textContent = `Player : ${winCount}`;
     computerScore.textContent = `Computer : ${loseCount}`;
+}
+
+function checkResult(){
+    if(winCount >= 5){
+        console.log('you won');
+        console.log(`you : ${winCount}, computer : ${loseCount}`);
+        resetGame();
+    }
+    else if(loseCount >= 5){
+        console.log('you lost');
+        console.log(`you : ${winCount}, computer : ${loseCount}`);
+        resetGame();
+    }
+    else return;
+}
+
+function resetGame(){
+    winCount = 0;
+    loseCount = 0;
+    scoreResult.textContent = 'Choose Your Weapon';
+    scoreMessage.textContent = 'Score 5 points to win the game';
+    playerTurn.textContent = '❔';
+    computerTurn.textContent = '❔';
+    playerScore.textContent = 'Player : 0';
+    computerScore.textContent = 'Computer : 0';
 }
 
 const scoreResult = document.querySelector('#scoreResult');
