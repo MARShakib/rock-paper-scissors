@@ -59,28 +59,37 @@ let loseCount = 0;
 
 function btnClick(e){
     if(this.getAttribute('id') === 'rock'){
-        playerTurn.textContent = '✊';
-        playerSelection = 'rock';
-        computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-        updateScore();
-        checkResult();
+        if(!(winCount >= 5 || loseCount >= 5)){
+            playerTurn.textContent = '✊';
+            playerSelection = 'rock';
+            computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+            updateScore();
+            checkResult();
+        }
+        else checkResult();
     }
     else if(this.getAttribute('id') === 'paper'){
-        playerTurn.textContent = '✋';
-        playerSelection = 'paper';
-        computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-        updateScore();
-        checkResult();
+        if(!(winCount >= 5 || loseCount >= 5)){
+            playerTurn.textContent = '✋';
+            playerSelection = 'paper';
+            computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+            updateScore();
+            checkResult();
+        }
+        else checkResult();
     }
     else {
-        playerTurn.textContent = '✌';
-        playerSelection = 'scissors';
-        computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-        updateScore();
-        checkResult();
+        if(!(winCount >= 5 || loseCount >= 5)){
+            playerTurn.textContent = '✌';
+            playerSelection = 'scissors';
+            computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+            updateScore();
+            checkResult();
+        }
+        else checkResult();
     }
 }
 
@@ -90,15 +99,9 @@ function updateScore(){
 }
 
 function checkResult(){
-    if(winCount >= 5){
-        console.log('you won');
-        console.log(`you : ${winCount}, computer : ${loseCount}`);
-        resetGame();
-    }
-    else if(loseCount >= 5){
-        console.log('you lost');
-        console.log(`you : ${winCount}, computer : ${loseCount}`);
-        resetGame();
+    if(winCount >= 5 || loseCount >= 5){
+        setFinalMessage();
+        openEndgameModal();
     }
     else return;
 }
@@ -112,6 +115,7 @@ function resetGame(){
     computerTurn.textContent = '❔';
     playerScore.textContent = 'Player : 0';
     computerScore.textContent = 'Computer : 0';
+    closeEndgameModal();
 }
 
 const scoreResult = document.querySelector('#scoreResult');
@@ -123,3 +127,27 @@ const computerScore = document.querySelector('.computerScore');
 const btns = document.querySelectorAll('.btn');
 
 btns.forEach(btn => btn.addEventListener('click', btnClick));
+
+const endgameModal = document.getElementById('endgameModal');
+const endgameMsg = document.getElementById('endgameMsg');
+const overlay = document.getElementById('overlay');
+const restartBtn = document.getElementById('restartBtn');
+
+restartBtn.addEventListener('click', resetGame);
+overlay.addEventListener('click', closeEndgameModal);
+
+function openEndgameModal() {
+    endgameModal.classList.add('active');
+    overlay.classList.add('active');
+  }
+  
+  function closeEndgameModal() {
+    endgameModal.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+  
+  function setFinalMessage() {
+    return winCount > loseCount
+      ? (endgameMsg.textContent = 'You won!')
+      : (endgameMsg.textContent = 'You lost...')
+  }
